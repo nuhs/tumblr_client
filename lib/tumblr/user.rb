@@ -16,11 +16,6 @@ module Tumblr
       get('v2/user/likes', options)
     end
 
-    def following(options = {})
-      validate_options([:limit, :offset], options)
-      get('v2/user/following', options)
-    end
-
     def follow(url)
       post('v2/user/follow', :url => url)
     end

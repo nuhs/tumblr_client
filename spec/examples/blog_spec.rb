@@ -89,6 +89,35 @@ describe Tumblr::Blog do
 
   end
 
+  describe :following do
+
+    context 'with invalid parameters' do
+
+      it 'should raise an error' do
+        expect(lambda {
+          client.following blog_name, :not => 'an option'
+        }).to raise_error ArgumentError
+      end
+
+    end
+
+    context 'with valid parameters' do
+
+      before do
+        expect(client).to receive(:get).once.with("v2/blog/#{blog_name}/following", {
+          :limit => 1
+        }).and_return('response')
+      end
+
+      it 'should construct the request properly' do
+        r = client.following blog_name, :limit => 1
+        expect(r).to eq'response'
+      end
+
+    end
+
+  end
+
   describe :blog_likes do
 
     context 'with invalid parameters' do

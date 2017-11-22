@@ -19,6 +19,17 @@ module Tumblr
       get(blog_path(blog_name, 'followers'), options)
     end
 
+    # Gets the list of followers for the blog
+    def following(blog_name = nil, options = {})
+      validate_options([:limit, :offset], options)
+      path = if blog_name.nil?
+        'v2/user/following'
+      else
+        blog_path(blog_name, 'following')
+      end
+      get(path, options)
+    end
+
     # Gets the list of likes for the blog
     def blog_likes(blog_name, options = {})
       validate_options([:limit, :offset, :before, :after], options)

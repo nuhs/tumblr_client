@@ -41,7 +41,7 @@ describe Tumblr::User do
   end
 
   # These two are very similar
-  [:following, :likes].each do |type|
+  [:likes].each do |type|
 
     describe type do
 
